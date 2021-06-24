@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React, { useState } from 'react';
+import LoanPage from './components/LoanPage';
+import Loans from './components/Loans';
+import Debtors from './components/Debtors';
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  const [isSubmitting, setIsSubmitted] = useState(false);
+  
+  function submitForm() {
+    setIsSubmitted(true)
+  }
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={LoanPage}/>
+          <Route exact path="/debtors" component={Debtors}/>
+          <Route exact path="/loans/:id" component={Loans}/>
+        </Switch>
+      </Router>
+      
     </div>
   );
 }
